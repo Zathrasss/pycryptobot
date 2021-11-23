@@ -338,9 +338,10 @@ def executeJob(
         else:
             price = float(df_last["close"].values[0])
 
-        if price < 0.000001:
+	#for BTC market the lowest price is 1 sathoshi
+        if price < 0.00000001:
             raise Exception(
-                f"{_app.getMarket()} is unsuitable for trading, quote price is less than 0.000001!"
+                f"{_app.getMarket()} is unsuitable for trading, quote price is less than 0.00000001!"
             )
 
         # technical indicators
@@ -1654,9 +1655,14 @@ def executeJob(
                 and _state.last_action == "BUY"
             ):
                 # show profit and margin if already bought
-                Logger.info(
-                    f"{now} | {_app.getMarket()}{bullbeartext} | {_app.printGranularity()} | Current Price: {str(price)} | Margin: {str(margin)} | Profit: {str(profit)}"
-                )
+                if getQuoteCurrency="BTC":
+                   Logger.info(
+                       f"{now} | {_app.getMarket()}{bullbeartext} | {_app.printGranularity()} | Current Price: {price:.8f} | Margin: {margin} | Profit: {profit:.8f}"
+                   )
+                else
+                   Logger.info(
+                       f"{now} | {_app.getMarket()}{bullbeartext} | {_app.printGranularity()} | Current Price: {str(price)} | Margin: {margin} | Profit: {str(profit)}"
+                   )
             else:
                 Logger.info(
                     f'{now} | {_app.getMarket()}{bullbeartext} | {_app.printGranularity()} | Current Price: {str(price)} is {str(round(((price-df["close"].max()) / df["close"].max())*100, 2))}% away from DF HIGH'

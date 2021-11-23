@@ -21,7 +21,7 @@ from models.exchange.Granularity import Granularity
 MARGIN_ADJUSTMENT = 0.0025
 DEFAULT_MAKER_FEE_RATE = 0.005
 DEFAULT_TAKER_FEE_RATE = 0.005
-MINIMUM_TRADE_AMOUNT = 10
+MINIMUM_TRADE_AMOUNT = 0.000021
 DEFAULT_GRANULARITY = 3600
 SUPPORTED_GRANULARITY = [60, 300, 900, 3600, 21600, 86400]
 FREQUENCY_EQUIVALENTS = ["T", "5T", "15T", "H", "6H", "D"]
@@ -465,7 +465,7 @@ class AuthAPI(AuthAPIBase):
             )
             raise TypeError("The funding amount is not numeric.")
 
-        # funding amount needs to be greater than 10
+        # funding amount needs to be greater than 0.000021 BTC (Smallest Base Order MIN)
         if quote_quantity < MINIMUM_TRADE_AMOUNT:
             Logger.warning(f"Trade amount is too small (>= {MINIMUM_TRADE_AMOUNT}).")
             return pd.DataFrame()
