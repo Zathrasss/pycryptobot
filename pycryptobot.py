@@ -1659,7 +1659,7 @@ def executeJob(
                    Logger.info(
                        f"{now} | {_app.getMarket()}{bullbeartext} | {_app.printGranularity()} | Current Price: {price:.8f} | Margin: {margin} | Profit: {profit:.8f}"
                    )
-                else
+                else:
                    Logger.info(
                        f"{now} | {_app.getMarket()}{bullbeartext} | {_app.printGranularity()} | Current Price: {str(price)} | Margin: {margin} | Profit: {str(profit)}"
                    )
