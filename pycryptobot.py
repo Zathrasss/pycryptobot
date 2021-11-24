@@ -1655,7 +1655,7 @@ def executeJob(
                 and _state.last_action == "BUY"
             ):
                 # show profit and margin if already bought
-                if getQuoteCurrency == "BTC":
+                if _app.getQuoteCurrency() == "BTC":
                    Logger.info(
                        f"{now} | {_app.getMarket()}{bullbeartext} | {_app.printGranularity()} | Current Price: {price:.8f} | Margin: {margin} | Profit: {profit:.8f}"
                    )
